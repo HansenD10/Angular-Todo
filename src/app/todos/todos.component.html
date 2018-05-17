@@ -1,0 +1,31 @@
+<div id="todos" class="mx-auto">
+  <input 
+      #desc 
+      [(ngModel)]="descValue" 
+      [value]="descValue" 
+      (keyup.enter)="createTask()" 
+      class="form-control taskInput" 
+      type="text" 
+      placeholder="What needs to be done?">
+  <div *ngFor="let task of tasks" class="todo">
+    <hr>
+    <label class="check row">
+      <div class="d-none d-md-block col-md-1">
+        <input (click)="checkItem(task)" class="form-control radio" type="checkbox"/>
+      </div>
+      <div class="col-11 col-md-10">
+        <p 
+            [ngClass]="task.completed === true ? 'todoDesc completed': 'todoDesc'"
+            >{{task.description}}</p>
+      </div>
+      <div class="col-1">
+        <p (click)="deleteTask(task)" class="deleteBtn text-right">X</p>
+      </div>
+    </label>
+  </div>
+  <hr>
+  <div *ngIf="tasks.length > 0" class="row" id="controls">
+    <p class="col-3 mr-auto" id="remainingItems">{{tasks.length}} item left.</p>
+    <button (click)="clearCompleted()" class="col-xs-4 delCompleted">Delete Completed Tasks</button>
+  </div>
+</div>
